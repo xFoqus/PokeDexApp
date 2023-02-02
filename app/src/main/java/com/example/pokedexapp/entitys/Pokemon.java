@@ -11,14 +11,20 @@ public class Pokemon implements Serializable {
 
     private List<Types> types;
 
+    private int weight;
+
 
     public int getId() {
         String [] urlSplitted = url.split("/");
         return Integer.parseInt(urlSplitted[urlSplitted.length -1]);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public String getName() {

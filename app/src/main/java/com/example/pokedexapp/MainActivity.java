@@ -103,43 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void itemSeleccionadoClick(View v, int posicion){
-
-
-
         Intent intent = new Intent(v.getContext(),DetallesPokemon.class);
         mandaTiposPorId(adaptadorListaPokemon.getDatosPokemon().get(posicion), intent);
     }
-
-
-
-
-    public String getPokeSpecies(String name){
-        ServicioPokeAPI servicioPokeAPI = conexionRetrofit.create(ServicioPokeAPI.class);
-        Call<PokemonSpecies> pokemonSpeciesCall = servicioPokeAPI.getPokemonSpeciesByName(name.toLowerCase());
-        final String[] url = new String[1];
-        pokemonSpeciesCall.enqueue(new Callback<PokemonSpecies>() {
-            @Override
-            public void onResponse(Call<PokemonSpecies> call, Response<PokemonSpecies> response) {
-                if(response.isSuccessful()){
-                    PokemonSpecies pspecies = response.body();
-                    System.out.println(pspecies.getEvolution_chain().getUrl());
-                    url[0] = pspecies.getEvolution_chain().getUrl();
-                }else{
-                    Toast.makeText(contexto,"Conexion fallida get species: " + response.toString(),Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PokemonSpecies> call, Throwable t) {
-
-            }
-        });
-        return url[0];
-    }
-
-
-
-
 
     private void mandaTiposPorId(Pokemon p, Intent intent){
         ServicioPokeAPI servicioPokeAPI = conexionRetrofit.create(ServicioPokeAPI.class);
@@ -150,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Pokemon pokemon = response.body();
                     List<Types> types = pokemon.getTypes();
+                    int weight = pokemon.getWeight();
                     p.setTypes(types);
+                    p.setWeight(weight);
                     intent.putExtra("pokemon",p);
                     startActivity(intent);
 

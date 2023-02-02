@@ -63,11 +63,11 @@ public class DetallesPokemon extends AppCompatActivity {
 
     private TextView viewName;
 
+
+    private TextView peso;
     private TextView type1Name;
 
     private Switch switchShiny;
-
-
 
 
     @Override
@@ -89,6 +89,7 @@ public class DetallesPokemon extends AppCompatActivity {
         pokemon1evolveImage = (ImageView) findViewById(R.id.imagePokemon1evolve);
         pokemon2evolveImage = (ImageView) findViewById(R.id.imagePokemon2evolve);
         pokemon3evolveImage = (ImageView) findViewById(R.id.imagePokemon3evolve);
+        peso = (TextView) findViewById(R.id.pesoPokemon);
 
 
         switchShiny.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -105,6 +106,7 @@ public class DetallesPokemon extends AppCompatActivity {
         setNombrePokemon(pokemon.getName().toUpperCase());
         setSpritePokemon(pokemon.getId());
         setType1Image(pokemon.getTypes().get(0).getType().getName().toUpperCase());
+        peso.setText("Weight: " +String.valueOf(pokemon.getWeight()));
 
         if(pokemon.getTypes().size() >=2){
             setType2Image(pokemon.getTypes().get(1).getType().getName().toUpperCase());
